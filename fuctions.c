@@ -1,5 +1,11 @@
 #include<stdio.h>
 
+int add(int,int);
+int sub(int,int);
+int mul(int,int);
+int div(int,int);
+int rem(int,int);
+double pwr(int,int);
 int Min(int,int);//min fuction
 int GCD(int,int);//to calculate GCD
 int LCM(int,int);//to calculate LCM
@@ -10,6 +16,65 @@ void Fibo(int);//to print numbers from fibonacci series upto n
 int getUserChoice();//to get input
 int execute(int);//to execute correct operation using switch case
 
+int add(int a,int b){
+    a+=b;
+    return a;
+}
+
+int sub(int a,int b){
+    a-=b;
+    return a;
+}
+
+int mul(int a,int b){
+    a*=b;
+    return a;
+}
+
+int div(int a,int b){
+    if (b == 0) {
+        printf("Error: Division by zero\n");
+        return 0;
+    }
+    a/=b;
+    return a;
+}
+
+int rem(int a,int b){
+    if (b == 0) {
+        printf("Error: Division by zero\n");
+        return 0;
+    }
+    a=a%b;
+    return a;
+}
+
+double pwr(int a, int b) {
+    if (a == 1 || b == 0) {
+        return 1;
+    }
+
+    double result = 1.0;
+    if (b > 0) {
+        result = a;
+        int i;
+        for (i = 1; i < b; i++) {
+            result *= a;
+        }
+    } else if (b < 0) {
+        if (a == 0) {
+            return 0;
+        }
+        result = 1.0 / a;
+        int i;
+        for (i = -1; i > b; i--) {
+            result /= a;
+        }
+
+    }
+
+    return result;
+}
 
 int Min(int a,int b){
     int min=a;
@@ -78,11 +143,17 @@ int getUserChoice(){
         "0 to Calculate GCD of 3 numbers\n"
         "1 to Calculate LCM of 3 numbers\n"
         "2 to Calculate Factorial of given number\n"
-        "3 to Print numbers from Fibonacci series upto given number\n");
+        "3 to Print numbers from Fibonacci series upto given number\n"
+        "4 to Add 2 given numbers"
+        "5 to Subtract second number from first"
+        "6 to Multiply 2 given numbers"
+        "7 to Give quotient for division of second number from first"
+        "8 to Give remainder for division of second number from first"
+        "9 to Calculate first input to the power second input");
     do{
         scanf("%d",&a);
     }
-    while(a!=0 && a!=1 && a!=2 && a!=3);
+    while(a < 0 || a > 9);
     return a;
 }
 
@@ -95,24 +166,62 @@ int execute(int choice){
         
         scanf("%d %d %d",&x,&y,&z);
         ans=GCD3(x,y,z);
-        printf("%d",ans);
+        printf("%d\n",ans);
         break;
     case 1:
         printf("Enter the numbers to calculate LCM\n");
         scanf("%d %d %d",&x,&y,&z);
         ans=LCM3(x,y,z);
-        printf("%d",ans);
+        printf("%d\n",ans);
         break;
     case 2:
         printf("Enter the number to calculate it's factorial\n");
         scanf("%d",&x);
         ans=factorial(x);
-        printf("%d",ans);
+        printf("%d\n",ans);
         break;
     case 3:
         printf("Enter the number to which numbers from Fibonnacci series should be printed\n");
         scanf("%d",&x);
         Fibo(x);
+        break;
+    case 4:
+        printf("Enter the numbers to be added\n");
+        scanf("%d %d",&x,&y);
+        printf("%d\n",add(x,y));
+        break;
+    case 5:
+        printf("Enter the first number\n");
+        scanf("%d",&x);
+        printf("Enter the second number\n");
+        scanf("%d",&y);
+        printf("%d\n",sub(x,y));
+        break;
+    case 6:
+        printf("Enter the numbers to be multiplied\n");
+        scanf("%d %d",&x,&y);
+        printf("%d\n",mul(x,y));
+        break;
+    case 7:
+        printf("Enter the divident\n");
+        scanf("%d",&x);
+        printf("Enter the divisor\n");
+        scanf("%d",&y);
+        printf("%d\n",div(x,y));
+        break;
+    case 8:
+        printf("Enter the divident\n");
+        scanf("%d",&x);
+        printf("Enter the divisor\n");
+        scanf("%d",&y);
+        printf("%d\n",rem(x,y));
+        break;
+    case 9:
+        printf("Enter the base\n");
+        scanf("%d",&x);
+        printf("Enter the power\n");
+        scanf("%d",&y);
+        printf("%f\n",pwr(x,y));
         break;
     default:
         printf("Error:Invalid input\n");
