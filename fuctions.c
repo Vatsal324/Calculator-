@@ -3,6 +3,13 @@
 int Min(int,int);//min fuction
 int GCD(int,int);//to calculate GCD
 int LCM(int,int);//to calculate LCM
+int GCD3(int,int,int);//Greatest Common Divisor for 3 numbers
+int LCM3(int,int,int);//Lowest Common Multiple for 3 numbers
+int factorial(int);//factorial function
+void Fibo(int);//to print numbers from fibonacci series upto n
+int getUserChoice();//to get input
+int execute(int);//to execute correct operation using switch case
+
 
 int Min(int a,int b){
     int min=a;
@@ -31,12 +38,6 @@ int LCM(int a,int b){
     int ans=a*b/GCD(a,b);
     return ans;
 }
-
-
-int GCD3(int,int,int);//Greatest Common Divisor for 3 numbers
-int LCM3(int,int,int);//Lowest Common Multiple for 3 numbers
-int factorial(int);//factorial function
-void Fibo(int);//to print numbers from fibonacci series upto n
 
 int GCD3(int a,int b,int c){
     int ans= GCD(GCD(a,b),c);
@@ -70,24 +71,24 @@ void Fibo(int n){
     printf("\n");
 }
 
-
-
-void main(){
-    int a;
-    int ans;
+int getUserChoice(){
+    int a;//Input
     printf("What operation do you want to perform\n"
         "Give input for corresponding operation:\n"
         "0 to Calculate GCD of 3 numbers\n"
         "1 to Calculate LCM of 3 numbers\n"
         "2 to Calculate Factorial of given number\n"
         "3 to Print numbers from Fibonacci series upto given number\n");
-    //Input
     do{
         scanf("%d",&a);
     }
     while(a!=0 && a!=1 && a!=2 && a!=3);
-    int x,y,z;
-    switch (a)
+    return a;
+}
+
+int execute(int choice){
+    int x,y,z,ans;
+    switch (choice)
     {
     case 0:
         printf("Enter the numbers to calculate GCD\n");
@@ -116,4 +117,10 @@ void main(){
     default:
         printf("Error:Invalid input\n");
     }
+}
+
+
+void main(){
+    int choice= getUserChoice();
+    execute(choice);  
 }
